@@ -12,4 +12,10 @@ describe('<CitySearch /> component', () => {
         const CitySearchWrapper = shallow(<CitySearch />);
         expect(CitySearchWrapper.find('.suggestions')).toHaveLength(1);
     });
+
+    test('renders text input correctly', () => {
+        const CitySearchWrapper = shallow(<CitySearch />);
+        const query = CitySearchWrapper.state('query');
+        expect(CitySearchWrapper.find('.city').prop('value')).toBe(query);
+    });
 });
