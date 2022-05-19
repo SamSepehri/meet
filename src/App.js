@@ -3,25 +3,45 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, extractLocations } from './api';
+import { extractLocations, getEvents } from './api';
+
 import './nprogress.css';
 
-
 class App extends Component {
+
+
   state = {
     events: [],
-    locations: []
+    locations: [],
+    numberOfEvents: 32,
+    currentLocation: 'all'
   }
 
-  updateEvents = (location) => {
+  updateEvents = (location, numberOfEvents) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
         events :
         events.filter((event) => event.location === location);
+
       this.setState({
-        events: locationEvents
+        events: locationEvents.slice(0, numberOfEvents),
+        currentLocation: location
       });
     });
+  }
+
+  updateNumberOfEvents = async (e) => {
+    const number = e.target.value;
+    if (number > 0 && number < 33) {
+      await this.setState({
+        numberOfEvents: number,
+      });
+      this.updateEvents(this.state.currentLocation, this.state.numberOfEvents);
+    } else {
+      await this.setState({
+        numberOfEvents: 32
+      });
+    }
   }
 
   componentDidMount() {
@@ -38,11 +58,12 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.events);
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
-        <NumberOfEvents />
+        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateNumberOfEvents={this.updateNumberOfEvents} />
       </div>
     );
   }

@@ -3,8 +3,11 @@ import { shallow, mount } from 'enzyme';
 import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
+import NumberOfEvents from '../NumberOfEvents';
 import { mockData } from '../mock-data';
 import { extractLocations, getEvents } from '../api';
+
+
 
 describe('<App /> component', () => {
     let AppWrapper;
@@ -19,7 +22,14 @@ describe('<App /> component', () => {
     test('render CitySearch', () => {
         expect(AppWrapper.find(CitySearch)).toHaveLength(1);
     });
+
+    test('render NumberOfEvents', () => {
+        expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
+    });
 });
+
+
+
 
 describe('<App /> integration', () => {
     test('App passes "events" state as a prop to EventList', () => {
@@ -61,4 +71,20 @@ describe('<App /> integration', () => {
         expect(AppWrapper.state('events')).toEqual(allEvents);
         AppWrapper.unmount();
     });
+
+    //NumberOfEvents integration tests
+    test('pass number of events as 32 per default', () => {
+        const AppWrapper = mount(<App />);
+        const NumberOfEventsState = AppWrapper.state('numberOfEvents');
+        expect(NumberOfEventsState).not.toEqual(undefined);
+        expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(32);
+        AppWrapper.unmount();
+    })
+
+    test('change numberOfEvents state when NumberOfEvents changes', async () => {
+        const AppWrapper = mount(<App />);
+        AppWrapper.find('.number-of-events').simulate('change', { target: { value: 12 } });
+        expect(AppWrapper.state('numberOfEvents')).toEqual(12);
+        AppWrapper.unmount();
+    })
 });
