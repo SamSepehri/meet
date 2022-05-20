@@ -66,6 +66,7 @@ describe("Filter events by city.", () => {
     });
 
     test("User should see a list of suggestions when they search for a city", async () => {
+        await page.click(".navbar-toggler");
         await page.type(".city", "Berlin", { delay: 100 }); //type slower than user
         const countCities = await page.$$eval(".suggestions li", (element) => element.length);
         expect(countCities).toBe(2);
@@ -73,6 +74,7 @@ describe("Filter events by city.", () => {
 
     test("User can select a city from the suggested list", async () => {
         await page.reload();
+        await page.click(".navbar-toggler");
         await page.type(".city", "Berlin", { delay: 100 }); //type slower than user
         await page.click(".suggestions li");
         const countEvents = await page.$$eval(".event", (element) => element.length);
