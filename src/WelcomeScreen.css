@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap");
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+}
+
+.bgimg {
+    background-image: url("./welcomePage.jfif");
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    font-family: "Tajawal", sans-serif;
+}
+
+.h1 {
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.logoPosition {
+    position: relative;
+    width: 192px;
+    height: auto;
+}
+
+.middleText {
+    position: relative;
+    text-align: center;
+    transform: translate(0%, 100%);
+}
+
+.middleDownText {
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(68, 64, 64, 0.363);
+    transform: translate(0%, 100%);
+}
+
+.a {
+    color: #ffffff;
+}
+
+.a:link {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.a:hover {
+    color: #470d21;
+}
+
+.bottomText {
+    position: static;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 18px;
+    transform: translate(0%, 300%);
+}
+
+div.transbox {
+    margin: 40px 80px 40px 80px;
+    /* top right bottom left*/
+    background-color: #ffffff;
+    border: 1px solid;
+    opacity: 0.5;
+    border-radius: 8px;
+}
+
+div.transbox p {
+    margin: 2%;
+    font-weight: bold;
+    color: #000000;
+}
+
+/* google button style start */
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+.google-btn-position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0%, 380%);
+}
+
+.google-btn {
+    cursor: pointer;
+    text-align: center;
+    width: 184px;
+    height: 42px;
+    background-color: #470d21;
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.google-btn .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #fff;
+}
+
+.google-btn .google-icon {
+    margin-top: 11px;
+    width: 22px;
+    height: 22px;
+}
+
+.google-btn .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+}
+
+.google-btn:hover {
+    box-shadow: 0 0 6px #201f1d;
+}
+
+.google-btn:active {
+    background: #c0d8c0;
+}
+
+@media only screen and (max-width: 767px) {
+    .logoPosition {
+        width: 260px;
+        left: 50%;
+        transform: translate(-50%, 30%);
+    }
+
+    .middleText {
+        font-size: 18px;
+        transform: translate(0%, 30%);
+    }
+
+    .middleDownText {
+        font-size: 22px;
+        transform: translate(0%, 30%);
+    }
+
+    .bottomText {
+        font-size: 16px;
+        transform: translate(0%, 60%);
+    }
+
+    div.transbox {
+        margin: 20px 40px 20px 40px;
+        /* top right bottom left*/
+        opacity: 0.6;
+    }
+
+    div.transbox p {
+        margin: 4%;
+    }
+
+    .google-btn-position {
+        transform: translate(0%, 100%);
+    }
+
+    .h1 {
+        font-size: 40px;
+    }
+}
