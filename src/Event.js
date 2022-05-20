@@ -1,53 +1,70 @@
 import React, { Component } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import CardGroup from "react-bootstrap/CardGroup";
+
 
 class Event extends Component {
-    state = {
-        collapsed: true,
-    };
 
-    handleClick = () => {
+
+    constructor(props) {
+        super(props);
+        // stting the values for the default states
+        this.state = {
+            collapsed: true,
+            detailsButtonText: "More Details",
+        };
+    }
+
+    // definding the event handler for the show/hide Details Button
+    eventDetails = () => {
         this.setState({
             collapsed: !this.state.collapsed,
+            detailsButtonText: this.state.collapsed ? "Less Details" : "More Details",
         });
     };
 
     render() {
         const { event } = this.props;
-        const { collapsed } = this.state;
         return (
             <div className="event">
-                <h2 className="summary">{event.summary}</h2>
-                <p className="start-date">
-                    {event.start.dateTime} ({event.start.timeZone})
-                </p>
-
-                <p className="location">
-                    @{event.summary} | {event.location}
-                </p>
-
-                <button
-                    variant="outline-info"
-                    className={`details-button ${collapsed ? "show" : "hide"}-details`}
-                    onClick={this.handleClick}
-                >
-                    {collapsed ? "Show Details" : "Hide Details"}
-                </button>
-
-                {!collapsed && (
-                    <div
-                        className={`extra-details ${this.state.collapsed ? "hide" : "show"
-                            }`}
-                    >
-                        <h3>About the event:</h3>
-                        <a href={event.htmlLink} rel="noreferrer" target="_blank">
-                            See details on Google Calendar
-                        </a>
-                        <p className="event-description">{event.description}</p>
-                    </div>
-                )}
+                <CardGroup>
+                    <Card>
+                        <Card.Header as="h3" className="event__summary">
+                            {event.summary}
+                        </Card.Header>
+                        <Card.Body>
+                            {/* the by defauld showen informaiton */}
+                            <Card.Title>Start time</Card.Title>
+                            <Card.Text className="event__start">{event.start.dateTime}</Card.Text>
+                            <Card.Title>Time zone</Card.Title>
+                            <Card.Text className="event__timeZone">{event.start.timeZone}</Card.Text>
+                            {/* the collapsed information */}
+                            {!this.state.collapsed && (
+                                <div className="event__moreDetails">
+                                    <Card.Title>Description</Card.Title>
+                                    <Card.Text className="event__description">{event.description}</Card.Text>
+                                    <Card.Title>End time</Card.Title>
+                                    <Card.Text className="event__end">{event.end.dateTime}</Card.Text>
+                                    <Card.Title>Location</Card.Title>
+                                    <Card.Text className="event__location">{event.location}</Card.Text>
+                                    <Card.Title>Calendar Link</Card.Title>
+                                    <Card.Link className="event__calendarLink" href={event.htmlLink}>
+                                        See details in Google Calendar
+                                    </Card.Link>
+                                </div>
+                            )}
+                            <Button
+                                className="event__detailsButton details-btn"
+                                onClick={() => this.eventDetails()}
+                            >
+                                {this.state.detailsButtonText}{" "}
+                            </Button>
+                        </Card.Body>
+                    </Card>
+                </CardGroup>
             </div>
         );
     }
 }
-
 export default Event;
