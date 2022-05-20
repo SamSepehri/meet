@@ -9,7 +9,7 @@ function WelcomeScreen(props) {
             <img className="logoPosition" src={logo} alt="logo" />
 
             <div className="middleText">
-                <h1 className="h1">Welcome to meet app</h1>
+                <h1 className="h1">Welcome to meetUp</h1>
                 <h2 className="middleDownText">
                     <a
                         className="a"
